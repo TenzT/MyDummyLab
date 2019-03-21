@@ -28,7 +28,7 @@ public class ServerHandlerNIO implements Runnable{
 			serverSocketChannel = ServerSocketChannel.open();	// A channel is created
 			// 如果为true，则此通道将被至于阻塞模式，如果为false，则此通道将为非阻塞
 			serverSocketChannel.configureBlocking(false);//开启非阻塞模式
-			// 绑定端口到通道的socket上
+			// 绑定端口到通道的socket上，第二个参数backlog表示等待队列的大小
 			serverSocketChannel.socket().bind(new InetSocketAddress(port),1024);
 			// 监听客户端连接请求（OP_ACCEPT），即将channel注册到selector上
 			serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
@@ -57,7 +57,7 @@ public class ServerHandlerNIO implements Runnable{
 				SelectionKey key = null;
 				while (it.hasNext()) {
 					key = it.next();
-					it.remove();
+					it.remove();	// 需要remove，否则事件会一直登记
 					try {
 						handleInput(key);	// 处理选择键
 					} catch (Exception e) {
@@ -90,18 +90,19 @@ public class ServerHandlerNIO implements Runnable{
 				ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
 				// 通过ServerChannel的accept创建SocketChannel实例（搭建铁路）
 				// 完成该操作意味着完成TCP三次握手，TCP物理链路正式建立
+				// 相较BIO直接从ServerSocket中获取socket，这里是从ServerSocketChannel中获取 SocketChannel
 				SocketChannel sc = ssc.accept();
 				// 设置为非阻塞的
 				sc.configureBlocking(false);
-				// 连接成功后，注册一个读事件的通道
+				// 连接成功后，注册一个监听读事件的socketchannel通道
 				sc.register(selector, SelectionKey.OP_READ);
 			}
 			//读消息
 			if(key.isReadable()) {	// 到这里就是真正的读取数据了
 				SocketChannel sc = (SocketChannel) key.channel();	// 搭建读铁路
-				//创建ByteBuffer，并开辟一个1M的缓冲区
+				// 创建ByteBuffer，并开辟一个1M的缓冲区
 				ByteBuffer buffer = ByteBuffer.allocate(1024);
-				//读取请求码流，返回读取到的字节数
+				// 从socketchannel中读取请求码流，返回读取到的字节数
 				int readBytes = sc.read(buffer);
 				//读取到字节，对字节进行编解码
 				if (readBytes>0) { 
@@ -124,7 +125,7 @@ public class ServerHandlerNIO implements Runnable{
 					doWrite(sc,result);
 				} else if (readBytes<0) {
 					key.cancel();	// 要记得取消键
-					sc.close();
+					sc.close();		// 关闭socketchannel，否则会一直监听
 				}
 			}
 		}

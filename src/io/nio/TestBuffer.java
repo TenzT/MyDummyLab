@@ -15,19 +15,19 @@ import java.util.ArrayList;
 */
 public class TestBuffer {
 	public static void main(String[] args) {
-		String test = "ABCDE";
+		String str1 = "ABCDE";
 		
 		// 1. 分配一个指定大小的缓冲区
-		System.out.println("-------after allocation ant put------");
+		System.out.println("-------after allocation and put------");
 		ByteBuffer buffer = ByteBuffer.allocate(10);
-		buffer.put(test.getBytes());
+		buffer.put(str1.getBytes());
 		System.out.println("capacity:" + buffer.capacity());
 		System.out.println("limit:" + buffer.limit());
 		System.out.println("position:" + buffer.position());
 		
 		// 2. filp使得从写模式变成读模式
 		System.out.println("-------after flip------");
-		buffer.flip();	// 说明开启读模式，会将position搬回0，limit搬到原来buffer的位置
+		buffer.flip();	// 会将position搬回0，limit搬到原来buffer的位置
 		System.out.println("capacity:" + buffer.capacity());
 		System.out.println("limit:" + buffer.limit());
 		System.out.println("position:" + buffer.position());
@@ -46,6 +46,20 @@ public class TestBuffer {
 		System.out.println("capacity:" + buffer.capacity());
 		System.out.println("limit:" + buffer.limit());
 		System.out.println("position:" + buffer.position());
+		
+		// 尝试分段读取
+		System.out.println("-------尝试分段读取------");
+		String str2 = "ABCDEFGHIJ";
+		buffer.put(str2.getBytes());
+		buffer.flip();
+		byte[] dst = new byte[5];
+		// 第一分片
+		buffer.get(dst);
+		System.out.println(new String(dst));
+		// 第二分片,由于没有filp，会从当前position继续读
+		buffer.get(dst);
+		System.out.println(new String(dst));
+		
 		
 	}
 }
