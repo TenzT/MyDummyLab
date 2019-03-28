@@ -1,0 +1,11 @@
+// 编译语句 protoc --java_out=../src/ person.proto
+syntax = "proto3";  		// 指定使用proto3语法
+package protobufTest;	// proto文件的包名
+
+option java_package = "protobuffer";
+option java_outer_classname = "PersonProtoBuf";
+
+message Person {
+  string name = 1; // 表明是singular，数据类型是string，序号为1
+  int32 age = 2;
+}

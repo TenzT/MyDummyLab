@@ -51,6 +51,10 @@
 	    <artifactId>slf4j-api</artifactId>
 	    <version>1.7.26</version>
 	</dependency>
-	
+	<dependency>
+	  <groupId>com.google.protobuf</groupId>
+	  <artifactId>protobuf-java</artifactId>
+	  <version>3.6.1</version>
+	</dependency>
   </dependencies>
 </project>
