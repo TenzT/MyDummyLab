@@ -1,4 +1,4 @@
-package lock.readwritelock;
+package readwritelock;
 
 public class ReadWithSynchronized {
 	public synchronized void get(Thread thread) {

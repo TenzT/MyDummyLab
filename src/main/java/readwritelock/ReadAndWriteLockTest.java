@@ -1,4 +1,4 @@
-package lock.readwritelock;
+package readwritelock;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

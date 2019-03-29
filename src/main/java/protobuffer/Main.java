@@ -2,14 +2,12 @@ package protobuffer;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 
-import protobuffer.PersonProtoBuf.Person;
-
 public class Main {
 	
 	// 创建实例
-	public static Person buildInstance() {
+	public static PersonProtoBuf.Person buildInstance() {
 //		Person person = Person.newBuilder().setName("Tenz").setAge(20).build();
-		Person.Builder personBuilder = Person.newBuilder();
+		PersonProtoBuf.Person.Builder personBuilder = PersonProtoBuf.Person.newBuilder();
 		personBuilder.setName("Tenz");
 		personBuilder.setAge(20);
 		
@@ -18,7 +16,7 @@ public class Main {
 	
 	// 
 	public static void main(String[] args) {
-		Person person = buildInstance();
+        PersonProtoBuf.Person person = buildInstance();
 		System.out.println(person);
 		
 		System.out.println("生成字节流");
@@ -30,9 +28,9 @@ public class Main {
 		System.out.println();
 		
 		System.out.println("从字节流中解析对象");
-		Person personOut = null;
+        PersonProtoBuf.Person personOut = null;
 		try {
-			personOut = Person.parseFrom(bs);
+			personOut = PersonProtoBuf.Person.parseFrom(bs);
 		} catch (InvalidProtocolBufferException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

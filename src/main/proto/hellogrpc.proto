@@ -1,0 +1,27 @@
+// PS：直接编译只能得到Model而并不能获得service类，需要用到插件，最后用maven打包
+syntax = "proto3";
+
+option java_multiple_files = true;	// 将操作类拆成多个文件,而不是都挤在一个outer类里面
+option java_package = "grpc.examples";
+option java_outer_classname = "HelloWorldProto";	
+option objc_class_prefix = "HLW";	// 这里只是方便obj-c使用而定义了
+
+package helloworld;
+
+// The greeting service definition.
+// Greater服务中有一个方法SayHello，可以让服务端从远程客户端接收一个包含用户名的
+// HelloRequest消息后，在一个HelloReply里发送回一个Greeter
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
