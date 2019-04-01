@@ -45,14 +45,15 @@ public class Response {
                     System.out.print((char)bytes[i]);
                 }
 
-                output.write(bytes, 0, ch);
+
 //                output.write(HEADER_SUCCESS.getBytes());
-//                while (ch!=-1) {
-//                    /**
-//                     * off参数指的是byte中的位置
-//                     */
-//                    ch = fis.read(bytes, 0, BUFFER_SIZE);
-//                }
+                while (ch!=-1) {
+                    output.write(bytes, 0, ch);
+                    /**
+                     * off参数指的是byte中的位置
+                     */
+                    ch = fis.read(bytes, 0, BUFFER_SIZE);
+                }
             } else {
                 output.write(HEADER_NOTFOUND.getBytes());
             }
