@@ -1,0 +1,1 @@
+# PS,build能够复制resources，compile不能
