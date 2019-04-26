@@ -110,7 +110,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>3.2.7.RELEASE</version>
+      <version>4.2.3.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.aspectj</groupId>
@@ -188,6 +188,19 @@
       <artifactId>activemq-all</artifactId>
         <version>5.9.0</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jms -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jms</artifactId>
+      <version>5.1.6.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.jms</groupId>
+      <artifactId>javax.jms-api</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+
 
   </dependencies>
 </project>

@@ -98,4 +98,15 @@
         <!-- 注入spring的连接池 -->
         <property name="connectionFactory" ref="connectionFactory"></property>
     </bean>
+
+    <!-- spring-jms消费者配置 -->
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <property name="destination" ref="queueDestination"></property>
+        <property name="messageListener" ref="consumerMessageListener"></property>
+    </bean>
+    <!-- 消息监听器 -->
+    <bean id="consumerMessageListener" class="middleware.activemq.springjms.consumer.ConsumerMessageListener">
+    </bean>
+
 </beans>
