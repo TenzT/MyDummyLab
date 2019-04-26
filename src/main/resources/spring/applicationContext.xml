@@ -12,6 +12,11 @@
     <bean name="helloSpring" class="spring.ioc.HelloSpring">
         <property name="name" value="Spring"></property>
     </bean>
+    <!--
+        还可以在属性前用@Autowire进行自动装配，但是@Autowire是byType的
+    -->
+    <bean name="includeHello" class="spring.ioc.IncludeHello" autowire="byName">
+    </bean>
 
     <!--
         通过构造器注入的方式创建Bean，要提供好属性（除非有相应的构造器），这里的类不需要提供get/set方法
@@ -31,12 +36,6 @@
         <constructor-arg value="3000"></constructor-arg>
     </bean>
 
-    <!--
-        还可以在属性前用@Autowire进行自动装配，但是@Autowire是byType的
-    -->
-    <bean name="includeHello" class="spring.ioc.IncludeHello" autowire="byName">
-
-    </bean>
 
     <!-- 导入资源文件 -->
     <context:property-placeholder location="spring/db.properties"/>
