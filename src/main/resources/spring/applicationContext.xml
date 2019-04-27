@@ -38,6 +38,7 @@
 
 
     <!-- 导入资源文件 -->
+    <!-- 数据库连接池配置 -->
     <context:property-placeholder location="spring/db.properties"/>
 
     <!-- 包扫描 -->
