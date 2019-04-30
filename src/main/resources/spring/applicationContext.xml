@@ -18,6 +18,12 @@
     <bean name="includeHello" class="spring.ioc.IncludeHello" autowire="byName">
     </bean>
 
+    <!-- @Autowiring测试 -->
+    <bean name="controller" class="spring.ioc.autowiring.Controller">
+    </bean>
+    <bean name="AserviceImpl" class="spring.ioc.autowiring.AServiceImpl"></bean>
+    <bean name="BserviceImpl" class="spring.ioc.autowiring.BServiceImpl"></bean>
+
     <!--
         通过构造器注入的方式创建Bean，要提供好属性（除非有相应的构造器），这里的类不需要提供get/set方法
         还可以指定index来标记输入实参的位置和参数的类型以区分构造器
