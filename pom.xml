@@ -201,6 +201,13 @@
       <version>2.0.1</version>
     </dependency>
 
+    <!-- kafka -->
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>2.2.0</version>
+    </dependency>
+
 
   </dependencies>
 </project>
